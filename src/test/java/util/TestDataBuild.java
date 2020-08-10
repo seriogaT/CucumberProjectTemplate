@@ -1,4 +1,4 @@
-package resources;
+package util;
 
 import model.Location;
 import model.LocationDetails;

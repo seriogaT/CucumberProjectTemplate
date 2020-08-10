@@ -10,8 +10,8 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
-import resources.TestDataBuild;
-import resources.Utils;
+import util.TestDataBuild;
+import util.Utils;
 
 import static io.restassured.RestAssured.given;
 import static org.junit.Assert.assertEquals;
