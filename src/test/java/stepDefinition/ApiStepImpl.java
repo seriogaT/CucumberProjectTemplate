@@ -39,7 +39,9 @@ public class ApiStepImpl extends Utils {
     @When("user calls {string} with post http request")
     public void userCallsAddPlaceAPIWithPostHttpRequest(String string) {
         response = reqSpec.when().post("/maps/api/place/add/json")
-                .then().spec(respSpec).extract().response();
+                .then()
+                .spec(respSpec).extract()
+                .response();
     }
 
     @Then("user receives status code {int}")
