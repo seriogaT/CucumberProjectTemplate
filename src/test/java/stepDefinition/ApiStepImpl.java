@@ -25,7 +25,6 @@ public class ApiStepImpl extends Utils {
     @Given("Add place Payload")
     public void addPlacePayload() {
 
-
         respSpec = new ResponseSpecBuilder()
                 .expectStatusCode(200)
                 .expectContentType(ContentType.JSON)

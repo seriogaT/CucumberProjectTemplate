@@ -21,6 +21,7 @@ public class TestDataBuild {
         List<String> myList = new ArrayList<>();
         myList.add("shoe park");
         myList.add("shoe");
+
         locationDetails.setTypes(myList);
 
         Location loc = new Location();
