@@ -22,8 +22,8 @@ public class ApiStepImpl extends Utils {
     Response response;
     TestDataBuild data = new TestDataBuild();
 
-    @Given("Add place Payload")
-    public void addPlacePayload() {
+    @Given("Add place Payload with {string} {string} {string}")
+    public void addPlacePayload(String name, String language, String address) {
 
         respSpec = new ResponseSpecBuilder()
                 .expectStatusCode(200)
@@ -32,7 +32,7 @@ public class ApiStepImpl extends Utils {
 
         reqSpec = given()
                 .spec(requestSpecification())
-                .body(data.addPlacePayload());
+                .body(data.addPlacePayload(name, language, address));
     }
 
 

@@ -8,14 +8,15 @@ import java.util.List;
 
 public class TestDataBuild {
 
-    public LocationDetails addPlacePayload() {
+    public LocationDetails addPlacePayload(String name, String language, String address) {
         //serialization of adding a place
         LocationDetails locationDetails = new LocationDetails();
 
         locationDetails.setAccuracy(50);
-        locationDetails.setName("Frontline house");
+        locationDetails.setName(name);
         locationDetails.setPhoneNumber("(+91) 983 893 3937");
-        locationDetails.setAddress("29, side layout, cohen 09");
+        locationDetails.setLanguage(language);
+        locationDetails.setAddress(address);
         locationDetails.setWebsite("https://rahulshettyacademy.com");
 
         List<String> myList = new ArrayList<>();
