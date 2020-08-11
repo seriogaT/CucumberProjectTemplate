@@ -10,6 +10,7 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
+import util.ApiResources;
 import util.TestDataBuild;
 import util.Utils;
 
@@ -36,12 +37,20 @@ public class ApiStepImpl extends Utils {
     }
 
 
-    @When("user calls {string} with post http request")
-    public void userCallsAddPlaceAPIWithPostHttpRequest(String string) {
-        response = reqSpec.when().post("/maps/api/place/add/json")
-                .then()
-                .spec(respSpec).extract()
-                .response();
+    @When("user calls {string} with {string} http request")
+    public void userCallsAddPlaceAPIWithPostHttpRequest(String resource, String httpMethod) {
+        ApiResources resourceApi = ApiResources.valueOf(resource);
+        resourceApi.getResource();
+
+        if (httpMethod.equalsIgnoreCase("POST")) {
+            response = reqSpec.when().post(resourceApi.getResource());
+        } else if (httpMethod.equalsIgnoreCase("GET")) {
+            response = reqSpec.when().get(resourceApi.getResource());
+        } else if (httpMethod.equalsIgnoreCase("PUT")) {
+            response = reqSpec.when().get(resourceApi.getResource());
+        } else if (httpMethod.equalsIgnoreCase("DELETE")) {
+            response = reqSpec.when().get(resourceApi.getResource());
+        }
     }
 
     @Then("user receives status code {int}")

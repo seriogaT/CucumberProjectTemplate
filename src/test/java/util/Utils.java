@@ -14,23 +14,25 @@ import java.util.Properties;
 
 public class Utils {
     RequestSpecBuilder specBuilder = new RequestSpecBuilder();
-    RequestSpecification reqSpecBuild;
+    public static RequestSpecification reqSpecBuild;
 
     @SneakyThrows
     public RequestSpecification requestSpecification() {
 
+        if (reqSpecBuild == null) {
 
-        PrintStream log = new PrintStream(new FileOutputStream("logging.txt"));
-        reqSpecBuild = specBuilder.setBaseUri(getGlobalValue("baseUrl"))
-                .addQueryParam("key", "qaclick123")
-                .addFilter(RequestLoggingFilter.logRequestTo(log))
-                .addFilter(ResponseLoggingFilter.logResponseTo(log))
-                .setContentType(ContentType.JSON)
-                .build();
+            PrintStream log = new PrintStream(new FileOutputStream("logging.txt"));
+            reqSpecBuild = specBuilder.setBaseUri(getGlobalValue("baseUrl"))
+                    .addQueryParam("key", "qaclick123")
+                    .addFilter(RequestLoggingFilter.logRequestTo(log))
+                    .addFilter(ResponseLoggingFilter.logResponseTo(log))
+                    .setContentType(ContentType.JSON)
+                    .build();
 
+            return reqSpecBuild;
+        }
         return reqSpecBuild;
     }
-
 
     @SneakyThrows
     public static String getGlobalValue(String key) {
