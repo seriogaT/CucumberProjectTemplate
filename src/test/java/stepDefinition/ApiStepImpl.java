@@ -22,6 +22,8 @@ public class ApiStepImpl extends Utils {
     RequestSpecification reqSpec;
     Response response;
     TestDataBuild data = new TestDataBuild();
+    JsonPath js;
+    static String placeId;
 
     @Given("Add place Payload with {string} {string} {string}")
     public void addPlacePayload(String name, String language, String address) {
@@ -60,8 +62,23 @@ public class ApiStepImpl extends Utils {
 
     @And("{string} in response body is {string}")
     public void inResponseBodyIs(String keyValue, String expectedValue) {
-        String resp = response.asString();
-        JsonPath js = new JsonPath(resp);
-        assertEquals(js.get(keyValue).toString(), expectedValue);
+        assertEquals(getJsonPath(response, keyValue), expectedValue);
+    }
+
+    @Then("verify placeId created maps to {string} using {string}")
+    public void verifyPlaceIdCreatedMapsToUsing(String expectedName, String resource) {
+
+        placeId = getJsonPath(response, "place_id");
+        reqSpec = given().spec(requestSpecification()).queryParam("place_id", placeId);
+
+        userCallsAddPlaceAPIWithPostHttpRequest(resource, "GET");
+
+        String actualName = getJsonPath(response, "name");
+        assertEquals(actualName, expectedName);
+    }
+
+    @Given("DeletePlace PayLoad")
+    public void deletePlacePayLoad() {
+        reqSpec = given().spec(requestSpecification()).body(data.deletePlacePayload(placeId));
     }
 }
